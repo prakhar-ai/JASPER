@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content%}
+<div class="ui container" style = "padding-left: 255px;padding-top: 40px; width:1450px" >
+  <div class="ui segment" >
+    <h1>Task List</h1>
+                        <table class="ui striped table">
+                            <thead>
+                              <tr>
+                                <th>Task</th>
+                                <th>Label</th>
+                                <th>Importance</th>
+                                <th>Urgency</th>
+                                <th>Effort</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for task in Tasklist %}
+                              <tr>
+                                <td>{{task.task }}</td>
+                                <td>{{task.label }}</td>
+                                <td>{{task.importance}}</td>
+                                <td>{{task.urgency}}</td>
+                                <td>{{task.effort }}</td>                        
+                             </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content%}
+<!-- Styles -->
+    
+    <!-- Resources -->
+    <script src="https://cdn.jsdelivr.net/gh/space10-community/conversational-form@latest/dist/conversational-form.min.js"></script>
+    <script>
+      window.onload = function() {
+  var conversationalForm = window.cf.ConversationalForm.startTheConversation({
+    formEl: document.getElementById("form"),
+    
+    context: document.getElementById("cf-context"),
+    submitCallback: function() {
+      var formData = conversationalForm.getFormData();
+                    var formDataSerialized = conversationalForm.getFormData(true);
+                    console.log("Formdata:", formData);
+                    console.log("Formdata, serialized:", formDataSerialized);
+    
+     conversationalForm.addRobotChatResponse("We've successfully added the task!"); 
+     document.getElementById("submitbutton").click();
+    }
+  });
+};
+
+    </script>
+    
+    <style>
+      #cf-context { 
+  width: 75vw; 
+  height: 85vh; 
+  
+} 
+#form {
+  height: 0px;
+}
+body {
+  background-color:#222222;
+}
+    </style>
+    <!-- Chart code -->
+
+    <!-- HTML -->
+   <div class="ui container" style = "padding-left: 255px;padding-top: 40px; width:1450px" >
+    <div class="ui segment" >
+      <form id="form" cf-form  action="/addtask" method="post" >
+        <input cf-questions="Hi! This is JASPER, would you like to add a new Task?" cf-label="Yes, let's begin!" type="radio" value="0">
+      <input cf-questions="What kind of Task is it?" type="radio" name="label" value="Work" cf-label="Work">
+      <input type="radio" name="label" value="Fitness" cf-label="Fitness">
+        <input type="radio" name="label" value="Home" cf-label="Home">
+        <input type="radio" name="label" value="Grocery" cf-label="Grocery">
+      <input type="text" name="task" cf-questions="Describe the Task">
+      <input type="number" min="1" max="10"  name="effort" cf-questions="On a scale of 1 - 10, how much effort would this task require?">
+      <input type="number" min="1" max="10"  name="urgency" cf-questions="On a scale of 1 - 10, how much urgent is this task?">
+      <input type="number" min="1" max="10"  name="importance" cf-questions="On a scale of 1 - 10, how important is this task?">
+      <button type="submit" class="fluid ui button" id="submitbutton">Submit</button>
+    </form>
+    <div id="cf-context" role="cf-context" cf-context></div>
+  </div>
+  </div> 
+{% endblock content %}
+

@@ -1,0 +1,244 @@
+{% extends "layout.html" %}
+{% block content%}
+<!-- Styles -->
+<style>
+    #chartdiv {
+      width: 1000px;
+      height: 700px;
+      max-height: 100%;
+    }
+    
+    </style>
+    
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/frozen.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    
+    <!-- Chart code -->
+    <script>
+    am4core.ready(function() {
+    
+    // Themes begin
+    am4core.useTheme(am4themes_frozen);
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+    
+    
+    // Create chart instance
+    var chart = am4core.create("chartdiv", am4charts.XYChart);
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.behavior = "zoomXY";
+    
+    // Create axes
+    var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+    xAxis.min = -100;
+    xAxis.max = 100;
+    xAxis.keepSelection = true;
+    xAxis.renderer.grid.template.above = true;
+    
+    var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    yAxis.min = -100;
+    yAxis.max = 100;
+    yAxis.keepSelection = true;
+    yAxis.renderer.grid.template.above = true;
+    
+    // Create color series
+    // top left
+    var series1 = chart.series.push(new am4charts.LineSeries());
+    series1.dataFields.valueX = "ax";
+    series1.dataFields.valueY = "ay";
+    series1.strokeOpacity = 0;
+    series1.fillOpacity = 1;
+    series1.ignoreMinMax = true;
+    series1.fill = am4core.color("rgba(112, 191, 63, 0.5)");
+    series1.data = [{
+      "ax": -1000,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": 1000
+    }, {
+      "ax": -1000,
+      "ay": 1000
+    }]
+    
+    // bottom left
+    var series2 = chart.series.push(new am4charts.LineSeries());
+    series2.dataFields.valueX = "ax";
+    series2.dataFields.valueY = "ay";
+    series2.strokeOpacity = 0;
+    series2.ignoreMinMax = true;
+    series2.fill = am4core.color("rgba(236, 220, 115, 0.5)");
+    series2.fillOpacity = 0.9;
+    series2.data = [{
+      "ax": -1000,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": -1000
+    }, {
+      "ax": -1000,
+      "ay": -1000
+    }]
+    
+    // bottom right
+    var series3 = chart.series.push(new am4charts.LineSeries());
+    series3.dataFields.valueX = "ax";
+    series3.dataFields.valueY = "ay";
+    series3.strokeOpacity = 0;
+    series3.fill = am4core.color("rgba(241, 39, 66, 0.5)");
+    series3.ignoreMinMax = true;
+    series3.fillOpacity = 0.9;
+    series3.data = [{
+      "ax": 1000,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": -1000
+    }, {
+      "ax": 1000,
+      "ay": -1000
+    }]
+    
+    // top right
+    var series4 = chart.series.push(new am4charts.LineSeries());
+    series4.dataFields.valueX = "ax";
+    series4.dataFields.valueY = "ay";
+    series4.strokeOpacity = 0;
+    series4.fill = am4core.color("rgba(63, 112, 191, 0.5)");
+    series4.ignoreMinMax = true;
+    series4.fillOpacity = 0.9
+    series4.data = [{
+      "ax": 1000,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": 0
+    }, {
+      "ax": 0,
+      "ay": 1000
+    }, {
+      "ax": 1000,
+      "ay": 1000
+    }]
+data = [{
+  "x": 60,
+  "ay": 60,
+  "aValue": 15,
+  "task": "Email Team for Updates"
+}, {
+  "x": -30,
+  "ay": -70,
+  "aValue": 20,
+  "task": "Prepare a deck for the next meeting"
+}, {
+    "x": -30,
+  "ay": 85,
+  "aValue": 17,
+  "task": "Update Project Plan"
+}, {
+    "x": 20,
+  "ay": 90,
+  "aValue": 11,
+  "task": "Create a Meeting agenda"
+}, {
+    "x": 30,
+  "ay": -70,
+  "aValue": 15,
+  "task": "Verify Project Budget"
+}, {
+    "x": -50,
+  "ay": -50,
+  "aValue": 50,
+  "task": "Email Team for Updates"
+},  {
+    "x": 80,
+  "ay": -90,
+  "aValue": 14,
+  "task": "Create new Workout Plan"
+}, {
+    "x": -20,
+  "ay": 30,
+  "aValue": 40,
+  "task": "File Tax Return"
+}, {
+    "x": -80,
+  "ay": -20,
+  "aValue": 30,
+  "task": "Email Team for Updates"
+}]
+    
+    // bubble series
+    
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.valueX = "x";
+    series.dataFields.valueY = "ay";
+    series.dataFields.value = "aValue";
+    series.strokeOpacity = 0;
+    
+    
+    var bullet = series.bullets.push(new am4core.Circle());
+    bullet.fill = am4core.color("#000000");
+    bullet.strokeOpacity = 0;
+    bullet.strokeWidth = 2;
+    bullet.fillOpacity = 0.5;
+    bullet.stroke = am4core.color("#ffffff");
+    bullet.hiddenState.properties.opacity = 0;
+    bullet.tooltipText = "{task}";
+    
+    
+    bullet.events.on("over", function(event) {
+      var target = event.target;
+      chart.cursor.triggerMove({ x: target.pixelX, y: target.pixelY }, "hard");
+      chart.cursor.lineX.y = target.pixelY;
+      chart.cursor.lineY.x = target.pixelX - chart.plotContainer.pixelWidth;
+      xAxis.tooltip.disabled = false;
+      yAxis.tooltip.disabled = false;
+    })
+    
+    bullet.events.on("out", function(event) {
+      chart.cursor.triggerMove(event.pointer.point, "none");
+      chart.cursor.lineX.y = 0;
+      chart.cursor.lineY.x = 0;
+      xAxis.tooltip.disabled = true;
+      yAxis.tooltip.disabled = true;
+    })
+    
+    series.heatRules.push({ target: bullet, min: 2, max: 30, property: "radius" });
+    series.data = data;
+    
+    
+    
+    // Scrollbars
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarY = new am4core.Scrollbar();
+    
+    
+    
+    
+    var label = chart.plotContainer.createChild(am4core.Label)
+    label.fontSize = 60;
+    label.fillOpacity = 0.4;
+    label.align = "center";
+    label.zIndex = 1000;
+    
+
+    
+    }); // end am4core.ready()
+    </script>
+    
+    <!-- HTML -->
+   <div class="ui container" style = "padding-left: 200px;padding-top: 40px;" ><div id="chartdiv"></div></div> 
+{% endblock content %}
+

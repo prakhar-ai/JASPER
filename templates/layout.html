@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>JASPER</title>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      html, body {
+          height: 100%;
+      }
+  
+      .ui.grid {
+        min-height: 100%;
+      }
+  </style>
+</head>
+<body>
+  <div class="ui container">
+    <div class="ui vertical inverted visible left sidebar menu">
+      <a class="item" style="padding:2em;">
+        <div> <h1>JASPER</h1></div>
+      </a>
+      <a class="item">
+        About
+      </a>
+      <div class="item">
+        Tasks
+        <div class="menu">
+          <a class="item" href="/add">Add</a>
+          <a class="item" href="/database">View</a>
+        </div>
+    </div>
+    
+    <a class="item" href="/home">
+      <i class="grid layout icon"></i> Charts
+    </a>
+</div>
+</div>
+    <div class="pusher">
+  {% block content%}{% endblock%}
+</div>
+</body>
+</html>
+
+
