@@ -40,68 +40,46 @@
     
     chart.data = [
       {
-        name: "Core",
+        name: "Tasks",
         children: [
           {
-            name: "First",
+            name: "Work",
             children: [
-              { name: "A1", value: 100 },
-              { name: "A2", value: 60 }
+              { name: "Start New Project", value: 100 },
+              { name: "Prepare for Meeting", value: 600 }
             ]
           },
           {
-            name: "Second",
+            name: "Home",
             children: [
-              { name: "B1", value: 135 },
-              { name: "B2", value: 98 }
+              { name: "Get new carpet", value: 135 },
+              { name: "Mow the Lawn", value: 980 },
+              { name: "Clean the Garage", value: 980 }
             ]
           },
           {
-            name: "Third",
+            name: "Fitness",
             children: [
               {
-                name: "C1",
+                name: "Gym",
                 children: [
-                  { name: "EE1", value: 130 },
-                  { name: "EE2", value: 87 },
-                  { name: "EE3", value: 55 }
+                  { name: "Dumbells", value: 130 },
+                  { name: "Squats", value: 870 },
+                  { name: "Planks", value: 550 }
                 ]
               },
-              { name: "C2", value: 148 },
-              {
-                name: "C3", children: [
-                  { name: "CC1", value: 53 },
-                  { name: "CC2", value: 30 }
-                ]
-              },
-              { name: "C4", value: 26 }
+              { name: "Get Protien Shake", value: 148 },
+              { name: "Buy Vitamins", value: 260 }
             ]
           },
           {
-            name: "Fourth",
+            name: "Groceries",
             children: [
-              { name: "D1", value: 415 },
-              { name: "D2", value: 148 },
-              { name: "D3", value: 89 }
+              { name: "Buy Milk", value: 415 },
+              { name: "Get Cornflakes", value: 548 },
+              { name: "Tic-Tacs", value: 589 }
             ]
           },
-          {
-            name: "Fifth",
-            children: [
-              {
-                name: "E1",
-                children: [
-                  { name: "EE1", value: 33 },
-                  { name: "EE2", value: 40 },
-                  { name: "EE3", value: 89 }
-                ]
-              },
-              {
-                name: "E2",
-                value: 148
-              }
-            ]
-          }
     
         ]
       }
@@ -110,17 +88,24 @@
     networkSeries.dataFields.value = "value";
     networkSeries.dataFields.name = "name";
     networkSeries.dataFields.children = "children";
-    networkSeries.nodes.template.tooltipText = "{name}:{value}";
+    networkSeries.nodes.template.tooltipText = "{name}";
     networkSeries.nodes.template.fillOpacity = 1;
     
     networkSeries.nodes.template.label.text = "{name}"
-    networkSeries.fontSize = 10;
+    networkSeries.fontSize = 15;
+    networkSeries.minRadius = 30;
     
     networkSeries.links.template.strokeWidth = 1;
     
     var hoverState = networkSeries.links.template.states.create("hover");
     hoverState.properties.strokeWidth = 3;
     hoverState.properties.strokeOpacity = 1;
+
+    var nodeTemplate = networkSeries.nodes.template;
+    nodeTemplate.tooltipText = "{name}";
+    nodeTemplate.fillOpacity = 1;
+    nodeTemplate.label.hideOversized = true;
+    nodeTemplate.label.truncate = true;
     
     networkSeries.nodes.template.events.on("over", function(event) {
       event.target.dataItem.childLinks.each(function(link) {
@@ -149,17 +134,3 @@
 {% endblock content %}
 
 
-
-<style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  background-color:#222222;
-}
-
-#chartdiv {
-  width: 100%;
-  height: 99vh;
-  max-height:700px;
-}
-</style>
